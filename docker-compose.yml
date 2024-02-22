@@ -1,0 +1,67 @@
+services:
+  db-raw-jobs:
+    image: postgres:16.1
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_PASSWORD=testing1234
+    volumes:
+      - db-raw-jobs:/var/lib/postgresql/data
+  api-raw-jobs:
+    build: ./entremed_raw_jobs_api
+    ports:
+      - 8000:8000
+    volumes:
+      - ./entremed_raw_jobs_api:/app
+    environment:
+      - POSTGRES_HOST=db-raw-jobs
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=testing1234
+      - POSTGRES_PORT=5432
+    depends_on:
+      - db-raw-jobs
+
+  db-watchdog:
+    image: postgres:16.1
+    ports:
+      - 5431:5432
+    environment:
+      - POSTGRES_PASSWORD=testing1234
+    volumes:
+      - db-watchdog:/var/lib/postgresql/data
+  api-watchdog:
+    build: ./entremed_watchdog
+    ports:
+      - 8001:8000
+    volumes:
+      - ./entremed_watchdog:/app
+    environment:
+      - POSTGRES_HOST=db-watchdog
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=testing1234
+      - POSTGRES_PORT=5432
+    depends_on:
+      - db-watchdog
+      - api-raw-jobs
+
+  scrapper:
+    build: ./entremed_scrapper
+    ports:
+      - 6800:6800
+    volumes:
+      - ./entremed_scrapper/entremed:/app
+    depends_on:
+      - api-raw-jobs
+      - api-watchdog
+  scheduler:
+    build: ./entremed_scheduler
+    volumes:
+      - ./entremed_scheduler:/app
+    depends_on:
+      - scrapper
+
+volumes:
+  db-raw-jobs:
+  db-watchdog:

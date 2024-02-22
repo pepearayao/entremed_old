@@ -1,0 +1,56 @@
+2023-12-21 19:02:40 [scrapy.utils.log] INFO: Scrapy 2.11.0 started (bot: entremed)
+2023-12-21 19:02:40 [scrapy.utils.log] INFO: Versions: lxml 4.9.3.0, libxml2 2.10.3, cssselect 1.2.0, parsel 1.8.1, w3lib 2.1.2, Twisted 22.10.0, Python 3.10.13 (main, Dec 19 2023, 20:49:50) [GCC 12.2.0], pyOpenSSL 23.3.0 (OpenSSL 3.1.4 24 Oct 2023), cryptography 41.0.5, Platform Linux-6.4.16-linuxkit-x86_64-with-glibc2.36
+2023-12-21 19:02:40 [scrapy.addons] INFO: Enabled addons:
+[]
+2023-12-21 19:02:40 [asyncio] DEBUG: Using selector: EpollSelector
+2023-12-21 19:02:40 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.asyncioreactor.AsyncioSelectorReactor
+2023-12-21 19:02:40 [scrapy.utils.log] DEBUG: Using asyncio event loop: asyncio.unix_events._UnixSelectorEventLoop
+2023-12-21 19:02:40 [scrapy.extensions.telnet] INFO: Telnet Password: 919be6b15af73fa1
+2023-12-21 19:02:40 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats']
+2023-12-21 19:02:40 [scrapy.crawler] INFO: Overridden settings:
+{'BOT_NAME': 'entremed',
+ 'CONCURRENT_REQUESTS': 1,
+ 'DOWNLOAD_DELAY': 5,
+ 'FEED_EXPORT_ENCODING': 'utf-8',
+ 'LOG_FILE': 'logs/entremed/cltrablisting/80f1b08ca03311eebd880242c0a8c006.log',
+ 'NEWSPIDER_MODULE': 'entremed.spiders',
+ 'REQUEST_FINGERPRINTER_IMPLEMENTATION': '2.7',
+ 'ROBOTSTXT_OBEY': True,
+ 'SPIDER_MODULES': ['entremed.spiders'],
+ 'TWISTED_REACTOR': 'twisted.internet.asyncioreactor.AsyncioSelectorReactor'}
+2023-12-21 19:02:40 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2023-12-21 19:02:40 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'entremed.middlewares.EntremedSpiderMiddleware',
+ 'entremed.middlewares.SaveJobStatsMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2023-12-21 19:02:40 [scrapy.middleware] INFO: Enabled item pipelines:
+['entremed.pipelines.StoreRawJobOfferPipeline']
+2023-12-21 19:02:40 [scrapy.core.engine] INFO: Spider opened
+2023-12-21 19:02:40 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2023-12-21 19:02:40 [cltrablisting] INFO: Spider opened: cltrablisting
+2023-12-21 19:02:40 [urllib3.connectionpool] DEBUG: Starting new HTTP connection (1): api-raw-jobs:8000
+2023-12-21 19:02:41 [urllib3.connectionpool] DEBUG: http://api-raw-jobs:8000 "POST /auth/token HTTP/1.1" 200 193
+2023-12-21 19:02:41 [urllib3.connectionpool] DEBUG: Starting new HTTP connection (1): api-watchdog:8000
+2023-12-21 19:02:41 [urllib3.connectionpool] DEBUG: http://api-watchdog:8000 "POST /auth/token HTTP/1.1" 200 193
+2023-12-21 19:02:41 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2023-12-21 19:02:41 [scrapy.core.engine] DEBUG: Crawled (403) <GET https://www.chiletrabajos.cl/robots.txt> (referer: None)

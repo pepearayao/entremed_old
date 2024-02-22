@@ -83,3 +83,22 @@ Then paste the data in:
 
 In your terminal just run `docker compose up`. This will locally generate a whole
 set of microservices and volumes tightly coupled with each other.
+
+#### Create the API users
+
+1. Go to localhost
+
+
+#### Eggify the Scrapper
+
+This is done so the scrapper can receive requests on the API and schedule spiders.
+
+To do this just run `` from inside the container.
+
+## Useful commands
+
+1. `docker compose up -d`
+2. `docker compose up -b --build`
+3. `docker compose down`
+4. `docker exec -ti container_name bash `
+5. `curl -u scrapyd:474c7419e9febbccaecb466e8e231abe0fc219d0c75db73c46859c7670b87716 http://localhost:6800/schedule.json -d project=entremed -d spider=cltrablisting`
