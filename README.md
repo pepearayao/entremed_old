@@ -20,7 +20,7 @@ on problems.
 
 ## How to use this Project
 
-<b>DISCLAIMER:<b> This project has not been optimized to be run on production. All the
+<b>DISCLAIMER:</b> This project has not been optimized to be run on production. All the
 instructions are considering you will run this locally. Passwords and users are
 openly declared in files and not yet stored in Docker secret.
 
