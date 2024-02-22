@@ -1,7 +1,7 @@
 # What is Entremed?
 
 Entremed is a product to help clinics and healthcare proffesionals to match based
-on interest and qualifications. ALl of this first for the country of Chile.
+on interest and qualifications. All of this has been made for the country of Chile.
 
 As it is a marketplace, the strategy is to first help job seekers with a tool
 to search and find their prefered job based on certain categories. That is why there is
@@ -20,7 +20,7 @@ on problems.
 
 ## How to use this Project
 
-DISCLAIMER: This project has not been optimized to be run on production. All the
+<b>DISCLAIMER:<b> This project has not been optimized to be run on production. All the
 instructions are considering you will run this locally. Passwords and users are
 openly declared in files and not yet stored in Docker secret.
 
@@ -77,7 +77,6 @@ Then paste the data in:
 
 1. `entremed_scheduler`
 2. `entremed_scrapper`
-
 
 
 ### Run the docker compose file
