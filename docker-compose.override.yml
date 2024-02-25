@@ -1,0 +1,73 @@
+services:
+
+  db-raw-jobs:
+    ports:
+      - 5433:5432
+    volumes:
+      - db-raw-jobs:/var/lib/postgresql/data
+
+  api-raw-jobs:
+    build: ./entremed_raw_jobs_api
+    ports:
+      - 8000:8000
+    volumes:
+      - ./entremed_raw_jobs_api:/app
+
+  db-watchdog:
+    ports:
+      - 5431:5432
+    volumes:
+      - db-watchdog:/var/lib/postgresql/data
+
+  api-watchdog:
+    build: ./entremed_watchdog
+    ports:
+      - 8001:8000
+    volumes:
+      - ./entremed_watchdog:/app
+
+  scrapper:
+    build: ./entremed_scrapper
+    ports:
+      - 6800:6800
+    volumes:
+      - ./entremed_scrapper/entremed:/app
+
+  scheduler:
+    build: ./entremed_scheduler
+    volumes:
+      - ./entremed_scheduler:/app
+
+volumes:
+ db-raw-jobs:
+ db-watchdog:
+
+secrets:
+  jobs_db_name:
+    file: dev_secrets/jobs_db_name.txt
+  jobs_db_username:
+    file: dev_secrets/jobs_db_username.txt
+  jobs_db_password:
+    file: dev_secrets/jobs_db_password.txt
+  watchdog_db_name:
+    file: dev_secrets/watchdog_db_name.txt
+  watchdog_db_username:
+    file: dev_secrets/watchdog_db_username.txt
+  watchdog_db_password:
+    file: dev_secrets/watchdog_db_password.txt
+  raw_jobs_api_username:
+    file: dev_secrets/raw_jobs_api_username.txt
+  raw_jobs_api_password:
+    file: dev_secrets/raw_jobs_api_password.txt
+  scrapper_api_username:
+    file: dev_secrets/scrapper_api_username.txt
+  scrapper_api_password:
+    file: dev_secrets/scrapper_api_password.txt
+  watchdog_api_username:
+    file: dev_secrets/watchdog_api_username.txt
+  watchdog_api_password:
+    file: dev_secrets/watchdog_api_password.txt
+  telegram_bot_token:
+    file: dev_secrets/telegram_bot_token.txt
+  telegram_alert_channel:
+    file: dev_secrets/telegram_alert_channel.txt

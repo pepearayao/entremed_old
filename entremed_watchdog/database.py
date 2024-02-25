@@ -5,10 +5,10 @@ from sqlalchemy.ext.declarative import declarative_base
 import os
 
 host = os.environ["POSTGRES_HOST"]
-user = os.environ["POSTGRES_USER"]
-password = os.environ["POSTGRES_PASSWORD"]
+db = (open("/run/secrets/watchdog_db_name", "r").read()).strip()
+user = (open("/run/secrets/watchdog_db_username", "r").read()).strip()
+password = (open("/run/secrets/watchdog_db_password", "r").read()).strip()
 port = os.environ["POSTGRES_PORT"]
-db = os.environ["POSTGRES_DB"]
 
 SQLALCHEMY_DATABASE_URL = f'postgresql://{user}:{password}@{host}:{port}/{db}'
 

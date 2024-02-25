@@ -7,4 +7,6 @@ RUN pip3 install --upgrade pip
 RUN pip3 install -r ../requirements.txt
 RUN rm -f ../requirements.txt
 
+COPY . .
+
 CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
