@@ -4,11 +4,11 @@ from sqlalchemy.ext.declarative import declarative_base
 
 import os
 
-host = os.environ["POSTGRES_HOST"]
+host = (open("/run/secrets/watchdog_db_host", "r").read()).strip()
 db = (open("/run/secrets/watchdog_db_name", "r").read()).strip()
 user = (open("/run/secrets/watchdog_db_username", "r").read()).strip()
 password = (open("/run/secrets/watchdog_db_password", "r").read()).strip()
-port = os.environ["POSTGRES_PORT"]
+port = (open("/run/secrets/watchdog_db_port", "r").read()).strip()
 
 SQLALCHEMY_DATABASE_URL = f'postgresql://{user}:{password}@{host}:{port}/{db}'
 

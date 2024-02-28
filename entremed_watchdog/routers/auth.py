@@ -40,7 +40,7 @@ def get_db():
 db_dependency = Annotated[Session, Depends(get_db)]
 
 def authenticate_user(machine_name: str, password: str, db):
-    
+
     user = db.query(Users).filter(Users.machine_name == machine_name).first()
     if not user:
         return False
@@ -67,14 +67,14 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                                 detail='Could not validate user.')
         return {'machine_name': machine_name, 'id': user_id, 'role': user_role}
-    
+
     except:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                             detail='Could not validate user.')
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
-async def create_user(db: db_dependency, 
+async def create_user(db: db_dependency,
                       create_user_request: CreateUserRequest):
     create_user_model = Users(
         machine_name = create_user_request.machine_name,
@@ -88,13 +88,12 @@ async def create_user(db: db_dependency,
 @router.post("/token", response_model=Token)
 async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
                                  db: db_dependency):
-    
+
     user = authenticate_user(form_data.username, form_data.password, db)
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                             detail='Could not validate user.')
-    
+
     token = create_access_token(user.machine_name, user.id, user.role, timedelta(minutes=60))
 
     return {'access_token': token, 'token_type': 'bearer'}
-    

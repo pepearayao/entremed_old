@@ -1,51 +1,22 @@
 services:
-  db-raw-jobs:
-    image: postgres:16.1
-    environment:
-      - POSTGRES_DB_FILE=/run/secrets/jobs_db_name
-      - POSTGRES_USER_FILE=/run/secrets/jobs_db_username
-      - POSTGRES_PASSWORD_FILE=/run/secrets/jobs_db_password
-      - POSTGRES_PORT_FILE=5432
-    secrets:
-      - jobs_db_name
-      - jobs_db_username
-      - jobs_db_password
-
   api-raw-jobs:
     image: entremed/raw_jobs_api:latest
-    environment:
-    - POSTGRES_HOST=db-raw-jobs
-    - POSTGRES_PORT=5432
     secrets:
+      - jobs_db_host
       - jobs_db_name
       - jobs_db_username
       - jobs_db_password
-    depends_on:
-      - db-raw-jobs
-
-  db-watchdog:
-    image: postgres:16.1
-    environment:
-      - POSTGRES_DB_FILE=/run/secrets/watchdog_db_name
-      - POSTGRES_USER_FILE=/run/secrets/watchdog_db_username
-      - POSTGRES_PASSWORD_FILE=/run/secrets/watchdog_db_password
-      - POSTGRES_PORT_FILE=5432
-    secrets:
-      - watchdog_db_name
-      - watchdog_db_username
-      - watchdog_db_password
+      - jobs_db_port
 
   api-watchdog:
     image: entremed/watchdog_api:latest
-    environment:
-      - POSTGRES_HOST=db-watchdog
-      - POSTGRES_PORT=5432
     secrets:
+      - watchdog_db_host
       - watchdog_db_name
       - watchdog_db_username
       - watchdog_db_password
+      - watchdog_db_port
     depends_on:
-      - db-watchdog
       - api-raw-jobs
 
   scrapper:
@@ -77,30 +48,30 @@ services:
       - api-raw-jobs
       - api-watchdog
 
-  scheduler:
-    image: entremed/scheduler:latest
-    environment:
-      - RAW_JOBS_API_ROOT_URL=http://api-raw-jobs
-      - RAW_JOBS_API_PORT=8000
-      - RAW_JOBS_API_JOBS_EXTENSION=/jobs
-      - RAW_JOBS_API_AUTH_EXTENSION=/auth
-      - SCRAPYD_API_ROOT_URL=http://scrapper
-      - SCRAPYD_API_SCHEDULE_EXTENSION=/schedule.json
-      - SCRAPYD_API_PORT=6800
-      - WATCHDOG_API_ROOT_URL=http://api-watchdog
-      - WATCHDOG_API_LOGS_SPIDERS_EXTENSION=/logs/spiders
-      - WATCHDOG_API_LOGS_ERRORS_EXTENSION=/logs/errors
-      - WATCHDOG_API_LOGS_MESSAGES_EXTENSION=/logs/messages
-      - WATCHDOG_API_AUTH_EXTENSION=/auth
-      - WATCHDOG_API_PORT=8000
-    secrets:
-      - raw_jobs_api_username
-      - raw_jobs_api_password
-      - scrapper_api_username
-      - scrapper_api_password
-      - watchdog_api_username
-      - watchdog_api_password
-      - telegram_bot_token
-      - telegram_alert_channel
-    depends_on:
-      - scrapper
+  # scheduler:
+  #   image: entremed/scheduler:latest
+  #   environment:
+  #     - RAW_JOBS_API_ROOT_URL=http://api-raw-jobs
+  #     - RAW_JOBS_API_PORT=8000
+  #     - RAW_JOBS_API_JOBS_EXTENSION=/jobs
+  #     - RAW_JOBS_API_AUTH_EXTENSION=/auth
+  #     - SCRAPYD_API_ROOT_URL=http://scrapper
+  #     - SCRAPYD_API_SCHEDULE_EXTENSION=/schedule.json
+  #     - SCRAPYD_API_PORT=6800
+  #     - WATCHDOG_API_ROOT_URL=http://api-watchdog
+  #     - WATCHDOG_API_LOGS_SPIDERS_EXTENSION=/logs/spiders
+  #     - WATCHDOG_API_LOGS_ERRORS_EXTENSION=/logs/errors
+  #     - WATCHDOG_API_LOGS_MESSAGES_EXTENSION=/logs/messages
+  #     - WATCHDOG_API_AUTH_EXTENSION=/auth
+  #     - WATCHDOG_API_PORT=8000
+  #   secrets:
+  #     - raw_jobs_api_username
+  #     - raw_jobs_api_password
+  #     - scrapper_api_username
+  #     - scrapper_api_password
+  #     - watchdog_api_username
+  #     - watchdog_api_password
+  #     - telegram_bot_token
+  #     - telegram_alert_channel
+  #   depends_on:
+  #     - scrapper

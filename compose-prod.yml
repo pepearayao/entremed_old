@@ -91,7 +91,7 @@ services:
       - RAW_JOBS_API_PORT=8000
       - RAW_JOBS_API_JOBS_EXTENSION=/jobs
       - RAW_JOBS_API_AUTH_EXTENSION=/auth
-      - SCRAPYD_API_ROOT_URL=http://localhost
+      - SCRAPYD_API_ROOT_URL=http://scrapper
       - SCRAPYD_API_SCHEDULE_EXTENSION=/schedule.json
       - SCRAPYD_API_PORT=6800
       - WATCHDOG_API_ROOT_URL=http://api-watchdog

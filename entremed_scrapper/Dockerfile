@@ -19,6 +19,6 @@ RUN echo "LANG=es_ES.UTF-8" > /etc/default/locale
 
 WORKDIR /app
 
-COPY . .
+COPY scrapyd.conf .
 
 CMD ["scrapyd"]
