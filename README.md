@@ -1,5 +1,8 @@
 # What is Entremed?
 
+:warning: NOTE THAT THIS IS OLD STUFF AND VERY BUGGY AND CRAPPY. NOW I USE SCRAPPY ITEMS AND PIPELINES CORRECTLY AND MORE SIMPLE ARCHITECTURE :warning:
+
+
 Entremed is a product to help clinics and healthcare proffesionals to match based
 on interest and qualifications. All of this has been made for the country of Chile.
 
